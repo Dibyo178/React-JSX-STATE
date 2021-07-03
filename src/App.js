@@ -7,6 +7,7 @@ function App() {
     { name: "illastrator", price: "$80.99" },
     { name: "AI", price: "$70.99" },
     { name: "GR", price: "$20.99" },
+    { name: "Premier-Elements", price: "$10.99" },
   ];
 
   // const productNames=products.map(p=>p.name);
@@ -38,6 +39,8 @@ function App() {
               borderRadius: "5px",
               height: "200px",
               width: "200px",
+              margin: "5px",
+              
             }}
           >
             <h2>{p.name}</h2>
@@ -47,10 +50,14 @@ function App() {
         ))}
 
         {/* <Product name={products[0].name} price={products[0].price}></Product> */}
-        <Product products={products[0]} />
+
+        {
+           products.map(p=><Product product={p}/>)
+        }
+        {/* <Product products={products[0]} />
         <Product products={products[1]} />
         <Product products={products[2]} />
-        <Product products={products[3]} />
+        <Product products={products[3]} /> */}
       </header>
     </div>
   );
@@ -68,8 +75,8 @@ function Product(props) {
   console.log(props);
   return (
     <div style={productStyle}>
-      <h2>{props.products.name}</h2>
-      <h3>{props.products.price}</h3>
+      <h2>{props.product.name}</h2>
+      <h3>{props.product.price}</h3>
       <button>Buy Now</button>
     </div>
   );
