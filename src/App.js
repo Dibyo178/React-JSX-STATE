@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Counter/>
+        <User/>
         <ul>
           {/* how to dynamiclly list create */}
 
@@ -62,6 +65,58 @@ function App() {
     </div>
   );
 }
+
+function User(){
+  const [users,setUsers]=useState([]);
+  useEffect(()=>{
+    // console.log('on loading')
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response=>response.json())
+    .then(data=>setUsers(data))
+  },[]) //empty array pass..
+  return (
+  
+    <div>
+      <h3>DisplayUser:{users.length}</h3>
+      { 
+        console.log(users)
+      }
+    <ul>
+      <li>
+        { 
+          users.map(user =><li>{user.name}</li>)
+          
+        }
+      </li>
+    </ul>
+    </div>
+
+  )
+}
+
+
+function Counter(){
+  const [count,setCount]=useState(0);
+ 
+  const handleIncrease =()=>{
+    // const newCount=count+1;
+    // setCount(newCount);
+    // setCount(count+1);
+  };
+  return(
+    <div>
+    <h1>Count:{count}</h1>
+    {/* <button onClick={handleIncrease}>Increase</button> */}
+    <button onMouseMove={ ()=>setCount(count+1)}>Increase</button>
+    <br/> 
+    <button onClick={ ()=>setCount(count-1)}>Decrease</button>
+  </div>
+  )
+ 
+}
+
+
+
 function Product(props) {
   const productStyle = {
     border: "1px solid gray",
